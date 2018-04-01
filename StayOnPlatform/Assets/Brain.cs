@@ -6,6 +6,7 @@ public class Brain : MonoBehaviour {
 
     int DNALength = 2;
     public float timeAlive;
+    public float timeWalking;
     public DNA dna;
     public GameObject eyes;
     bool alive = true;
@@ -28,6 +29,7 @@ public class Brain : MonoBehaviour {
 
             dna = new DNA(DNALength, 3);
             timeAlive = 0;
+            timeWalking = 0;
             alive = true;
            
         }
@@ -35,10 +37,7 @@ public class Brain : MonoBehaviour {
 
 
     // Use this for initialization
-    void Start () {
-		
-	}
-	
+ 
 	// Update is called once per frame
 	void Update () {
         if (!alive)
@@ -55,6 +54,7 @@ public class Brain : MonoBehaviour {
             {
                 seeGround = true;
             }
+
         }
 
         timeAlive = PopulationManager.elapsed;
@@ -64,14 +64,14 @@ public class Brain : MonoBehaviour {
 
         if (seeGround)
         {
-            if (dna.GetGene(0) == 0) move = 1;
+            if (dna.GetGene(0) == 0) { move = 1; timeWalking++; }
             else if (dna.GetGene(0) == 1) turn = -90;
             else if (dna.GetGene(0) == 2) turn = 90;
         }
 
         else
         {
-            if (dna.GetGene(1) == 0) move = 1;
+            if (dna.GetGene(1) == 0) { move = 1; timeWalking++; }
             else if (dna.GetGene(1) == 1) turn = -90;
             else if (dna.GetGene(1) == 2) turn = 90;
         }

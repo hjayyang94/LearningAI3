@@ -51,9 +51,35 @@ public class PopulationManager : MonoBehaviour {
 
         return offSpring;
     }
+
+    void BreedNewPopulation()
+    {
+        List<GameObject> sortedList = population.OrderBy(o => o.GetComponent<Brain>().timeWalking).ToList();
+
+        population.Clear();
+
+        for (int i = (int) (sortedList.Count/2.0f) -1; i < sortedList.Count - 1; i++)
+        {
+            population.Add(Breed(sortedList[i], sortedList[i + 1]));
+            population.Add(Breed( sortedList[i + 1], sortedList[i]));
+        }
+
+        for(int i = 0; i < sortedList.Count; i++)
+        {
+            Destroy(sortedList[i]);
+
+        }
+        generation++;
+ 
+    }
 	
 	// Update is called once per frame
 	void Update () {
-		
+        elapsed += Time.deltaTime;
+        if (elapsed >= trialTime)
+        {
+            BreedNewPopulation();
+            elapsed = 0;
+        }
 	}
 }

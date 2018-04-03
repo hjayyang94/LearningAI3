@@ -9,7 +9,7 @@ public class PopulationManager : MonoBehaviour {
     public int populationSize = 50;
     List<GameObject> population = new List<GameObject>();
     public static float elapsed = 0;
-    public float trialTime = 5;
+    public float trialTime = 20;
     int generation = 1;
 
     GUIStyle guiStyle = new GUIStyle();
